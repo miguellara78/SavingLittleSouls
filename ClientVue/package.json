@@ -1,0 +1,30 @@
+{
+  "name": "savinglittlesouls-client-vue",
+  "description": "Front end for saving little souls website.",
+  "version": "1.0.0",
+  "author": "Miguel Lara",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
+    "element-ui": "^1.3.4",
+    "font-awesome": "^4.7.0",
+    "vue": "^2.3.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0.0",
+    "babel-loader": "^6.0.0",
+    "babel-preset-latest": "^6.0.0",
+    "cross-env": "^3.0.0",
+    "css-loader": "^0.25.0",
+    "file-loader": "^0.9.0",
+    "style-loader": "^0.18.1",
+    "vue-loader": "^11.1.1",
+    "vue-template-compiler": "^2.2.1",
+    "webpack": "^2.2.0",
+    "webpack-dev-server": "^2.2.0"
+  }
+}
