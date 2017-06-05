@@ -142,16 +142,16 @@
       <h2>Available pets for adoption.</h2>
     </div>
     <div class="row" id="pendingFadeIn">
-      <div v-for="n in 4" class="col span-1-of-4 box">
-        <img src="./assets/home/Img/dummy.jpg"/>
-        <h3>Molly</h3>
+      <div *ngFor="let pet of pets" class="col span-1-of-4 box">
+        <img src="{{pet.imagePath}}"/>
+        <h3>{{pet.name}}</h3>
         <div class="pending-feature">
           <i class="fa fa-h-square small-icon"></i>
-          TAG ID: 1234567
+          TAG ID: {{pet.tag}}
         </div>
         <div class="pending-feature">
-          Molly is a 3 y/o, female Yorkie Dog,
-          It weights 3 lbs with Brown Color.
+          {{pet.name}} is a {{pet.age}} y/o, {{pet.gender}} {{pet.breed}} {{pet.type}},
+          It weights {{pet.weight}} lbs with {{pet.color}} Color.
         </div>
       </div>
     </div>
