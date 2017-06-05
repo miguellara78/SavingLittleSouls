@@ -19,9 +19,14 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../src/assets/home/libs/jquery-2.2.3.js",
+        "../src/assets/home/libs/jquery.waypoints.js",
+        "../src/assets/home/libs/main.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

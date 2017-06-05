@@ -1,0 +1,125 @@
+﻿
+/*BIG TABLET TO 1200PX--- FROM 1024 TO 1200PX*/
+@media only screen and (max-width: 1200px){
+.header-text-box {
+    width: 100%;
+    padding: 0 2%;
+}
+
+.row{
+    padding: 0 2%;
+}
+
+ .phone{
+     width: 50%;
+ }
+
+.contact-form{
+    width: 70%;
+}
+
+}
+
+
+/*SMALL TABLET TO BIG TABLET --- FROM 768 TO 1023PX*/
+@media only screen and (max-width: 1023px){
+
+ html{
+        font-size: 16px;
+    }
+
+ section{
+     padding: 40px;
+ }
+
+ header h1 {
+    font-size: 160%;
+}
+
+header h2 {
+    font-size: 130%;
+    margin-bottom: 20px;
+}
+
+ .phone{
+     width: 65%;
+ }
+
+ .process-step{
+    margin-bottom:30px;
+}
+
+ .process-step div{
+    height:40px;
+    width: 40px;
+    font-size: 130%;
+    float:left;
+    margin-right:15px;
+}
+
+ .contact-form{
+    width: 80%;
+}
+}
+
+
+/*MEDIUM PHONES FROM SMALL TABLET --- FROM 481 TO 767PX*/
+@media only screen and (max-width: 767px){
+
+}
+
+
+/*SMALL PHONES ---- FROM 0 TO 480PX*/
+@media only screen and (max-width: 480px){
+    .span-1-of-2 {
+    width: 50%;
+}
+
+.nav-main{
+    float:left;
+}
+
+.nav-main li {
+   margin-left: 20px;
+}
+
+    .nav-main li a:link,
+    .nav-main li a:visited {
+        font-size:70%;
+    }
+
+.header-text-box {
+    width: 100%;
+    padding: 0 3%;
+}
+
+ header h1 {
+    font-size: 100%;
+}
+
+header h2 {
+    font-size: 90%;
+    margin-bottom: 20px;
+}
+
+html{
+      font-size: 14px;
+}
+
+ section{
+     padding: 30px;
+ }
+
+.logo {
+    position:absolute;
+    top:80%;
+    right:10%;
+    height: 70px;
+    width: auto;
+}
+
+.contact-form{
+    width: 90%;
+}
+
+}

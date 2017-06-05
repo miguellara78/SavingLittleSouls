@@ -1,0 +1,277 @@
+<div id="app">
+  <header id="Home">
+    <nav>
+      <div class="row">
+        <a href="#Home"><img class="logo" src="./assets/home/Img/logo.png" alt="Saving Little Souls Logo"/></a>
+        <ul class="nav-main">
+          <li><a href="#Mission">Our Mission</a></li>
+          <li><a href="#Process">Adoption Process</a></li>
+          <li><a href="#Pending">Meet Our Pets</a></li>
+          <li><a href="#Contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="header-text-box">
+      <h1>You can't buy love, but it can be rescued.</h1>
+      <h2>Adopt a friend and save a life.</h2>
+      <a class="btn btn-full" href="#Process">I am ready to Adopt</a>
+      <a class="btn btn-ghost" href="#Mission">Please tell me More</a>
+    </div>
+  </header>
+  <section class="section-mission" id="Mission">
+    <div class="row">
+      <h2>We proudly &mdash; Save Animals!</h2>
+      <p class="long-copy">
+        Hi, we are Saving Little Souls, a nonprofit organization with the sole purpose of rescuing abandoned,
+        non wanted or orphaned domestic animals in order to find them a new loving long lasting home.
+      </p>
+    </div>
+    <div class="row" id="missionFadeIn">
+      <div class="col span-1-of-4 box">
+        <i class="fa fa-home big-icon"></i>
+        <h3>Real Homes</h3>
+        <p>
+          We are an all�volunteer local organization. We do not utilize a shelter.
+          All of our animals are fostered by volunteers in their loving homes until suitable and permanent families are
+          found.
+        </p>
+      </div>
+      <div class="col span-1-of-4 box">
+        <i class="fa fa-money big-icon"></i>
+        <h3>Non Profit</h3>
+        <p>
+          We rely 100% on your donations to support our efforts; to provide medical care, micro-chipping, to spay or
+          neuter and save lives.
+          All donations are tax deductible.
+        </p>
+      </div>
+      <div class="col span-1-of-4 box">
+        <i class="fa fa-users big-icon"></i>
+        <h3>Volunteers</h3>
+        <p>
+          If you would like to join us in our efforts, we sure could use your help. Even just one day per month will
+          make a world of difference.
+          What ever works best for your schedule!
+        </p>
+      </div>
+      <div class="col span-1-of-4 box">
+        <i class="fa fa-medkit big-icon"></i>
+        <h3>Rehabilitation</h3>
+        <p>
+          Our pets are evaluated, socialized, and given the loving care they need, prior to adoption.
+          Pets have their basic shots and are spayed/neutered.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="section-pet-showcase clearfix">
+    <ul class="pets-showcase">
+      <li>
+        <figure class="pet-photo">
+          <img src="./assets/home/Img/gallery01.jpg" alt="Rescued pet 1"/>
+        </figure>
+      </li>
+      <li>
+        <figure class="pet-photo">
+          <img src="./assets/home/Img/gallery02.jpg" alt="Rescued pet 2"/>
+        </figure>
+      </li>
+      <li>
+        <figure class="pet-photo">
+          <img src="./assets/home/Img/gallery03.jpg" alt="Rescued pet 3"/>
+        </figure>
+      </li>
+      <li>
+        <figure class="pet-photo">
+          <img src="./assets/home/Img/gallery04.jpg" alt="Rescued pet 4"/>
+        </figure>
+      </li>
+    </ul>
+    <ul class="pets-showcase">
+      <li>
+        <figure class="pet-photo">
+          <img src="./assets/home/Img/gallery05.jpg" alt="Rescued pet 5"/>
+        </figure>
+      </li>
+      <li>
+        <figure class="pet-photo">
+          <img src="./assets/home/Img/gallery06.jpg" alt="Rescued pet 6"/>
+        </figure>
+      </li>
+      <li>
+        <figure class="pet-photo">
+          <img src="./assets/home/Img/gallery07.jpg" alt="Rescued pet 7"/>
+        </figure>
+      </li>
+      <li>
+        <figure class="pet-photo">
+          <img src="./assets/home/Img/gallery08.jpg" alt="Rescued pet 8"/>
+        </figure>
+      </li>
+    </ul>
+  </section>
+  <section class="section-process" id="Process">
+    <div class="row">
+      <h2>Adoption Process &mdash; Simple as 1, 2, 3</h2>
+    </div>
+    <div class="row">
+      <div class="col span-1-of-2 steps-box">
+        <img src="./assets/home/Img/phone.png" class="phone" id="phoneFadeIn"/>
+      </div>
+      <div class="col span-1-of-2 steps-box">
+        <div class="process-step">
+          <div>1</div>
+          <p>Browse our Pets gallery and find your new best friend and click the <strong>I want to adopt</strong>
+            button.</p>
+        </div>
+        <div class="process-step">
+          <div>2</div>
+          <p>Fill out the adoption form that will appear after you click the <strong>I want to adopt</strong> button.</p>
+        </div>
+        <div class="process-step">
+          <div>3</div>
+          <p>That's it, one of our staff members will contact you promptly to set up an appointment!</p>
+        </div>
+        <span>You can download our Adoption Form from the link below, and fill it out at home so you can have it ready for when you come to your appointment.</span>
+        <a class="btn btn-full" href="#">Adoption Form</a>
+      </div>
+    </div>
+  </section>
+  <section class="section-pending" id="Pending">
+    <div class="row">
+      <h2>Available pets for adoption.</h2>
+    </div>
+    <div class="row" id="pendingFadeIn">
+      <div v-for="n in 4" class="col span-1-of-4 box">
+        <img src="./assets/home/Img/dummy.jpg"/>
+        <h3>Molly</h3>
+        <div class="pending-feature">
+          <i class="fa fa-h-square small-icon"></i>
+          TAG ID: 1234567
+        </div>
+        <div class="pending-feature">
+          Molly is a 3 y/o, female Yorkie Dog,
+          It weights 3 lbs with Brown Color.
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section-testimonials">
+    <div class="row">
+      <h2>What previous adopters have to say</h2>
+    </div>
+    <div class="row">
+      <div class="col span-1-of-3">
+        <i class="fa fa-quote-left"></i>
+        <blockquote>
+          I think Saving Little Souls.com is a wonderful tool for any shelter. It is user friendly.
+          We have had several new parents at the shelter who found their new baby on this site.
+        </blockquote>
+        <cite><img src="./assets/home/Img/person1.jpg"/> Ritta Greens</cite>
+      </div>
+      <div class="col span-1-of-3">
+        <i class="fa fa-quote-left"></i>
+        <blockquote>
+          We have used this site for about a year now and I love it. Our pups get a lot of exposure.
+          This site is very easy to use and I have found I get most of my questions about my pups from this site.
+        </blockquote>
+        <cite><img src="./assets/home/Img/person2.jpg"/> Brian Bodger</cite>
+      </div>
+      <div class="col span-1-of-3">
+        <i class="fa fa-quote-left"></i>
+        <blockquote>
+          I love the way this site is set up. It has made posting pets as easy as can be. We have gotten several of our
+          pets adopted because of Saving Little Souls.com. Thanks!
+        </blockquote>
+        <cite><img src="./assets/home/Img/person3.jpg"/> Robert Hess</cite>
+      </div>
+    </div>
+  </section>
+  <section class="section-contact" id="Contact">
+    <div class="row">
+      <h2>Get in touch with us</h2>
+    </div>
+    <div class="row">
+      <form method="post" action="#" class="contact-form">
+        <div class="row">
+          <div class="col span-1-of-3">
+            <label>Name:</label>
+          </div>
+          <div class="col span-2-of-3">
+            <input type="text" name="name" id="name" placeholder="Your name" required/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col span-1-of-3">
+            <label>Email:</label>
+          </div>
+          <div class="col span-2-of-3">
+            <input type="email" name="email" id="email" placeholder="Your email" required/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col span-1-of-3">
+            <label>How did you find us:</label>
+          </div>
+          <div class="col span-2-of-3">
+            <select name="findUs" id="findUs">
+              <option value="0">Friends</option>
+              <option value="0" selected>Search Engine</option>
+              <option value="0">Advertisement</option>
+              <option value="0">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col span-1-of-3">
+            <label>Subscribe to mail list?</label>
+          </div>
+          <div class="col span-2-of-3">
+            <input type="checkbox" name="subscribe" id="subscribe"/> <span>Yes please</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col span-1-of-3">
+            <label>Comments:</label>
+          </div>
+          <div class="col span-2-of-3">
+            <textarea name="comments" id="comments" placeholder="Your comments" required rows="4"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col span-1-of-3">
+            <label>&nbsp;</label>
+          </div>
+          <div class="col span-2-of-3">
+            <input type="submit" value="Send"/>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+  <footer>
+    <div class="row">
+      <div class="col span-1-of-2">
+        <ul class="nav-footer">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Partners</a></li>
+        </ul>
+      </div>
+      <div class="col span-1-of-2">
+        <ul class="social-links">
+          <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+          <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+          <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+          <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <p>
+        Copyright &copy; 2016 Saving Little Souls - All rights reserved
+      </p>
+    </div>
+  </footer>
+</div>
