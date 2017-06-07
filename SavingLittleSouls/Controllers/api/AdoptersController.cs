@@ -115,8 +115,6 @@ namespace SavingLittleSouls.Controllers.API
             {
                 return new NotFoundResult();
             }
-            
-
         }
     }
 }

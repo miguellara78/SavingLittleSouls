@@ -28,6 +28,8 @@ namespace SavingLittleSouls
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("SavingLittleSoulsConnectionString")));
 
+            services.AddCors();
+
             services.AddMvc();
         }
 
@@ -45,6 +47,9 @@ namespace SavingLittleSouls
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:4200"));
 
             app.UseDefaultFiles();
             app.UseStaticFiles();

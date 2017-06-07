@@ -107,9 +107,10 @@ namespace SavingLittleSouls.DataHelpers
 
 
             modelBuilder.Entity<PetImage>().HasKey(a => a.Id);
-            modelBuilder.Entity<PetImage>().Property(a => a.Image)
+            modelBuilder.Entity<PetImage>().Property(a => a.ImagePath)
                 .IsRequired()
-                .HasColumnType("image");
+                .HasMaxLength(100);
+            modelBuilder.Entity<PetImage>().Property(a => a.Featured);
             modelBuilder.Entity<PetImage>().HasOne(a => a.Pet)
                .WithMany(b => b.PetImages)
                .HasForeignKey(c => c.PetId)

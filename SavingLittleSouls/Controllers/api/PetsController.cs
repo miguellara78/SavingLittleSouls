@@ -1,77 +1,109 @@
-﻿//using System;
-//using System.Linq;
-//using System.Web.Http;
-//using SavingLittleSouls.DataHelpers;
-//using SavingLittleSouls.Models;
+﻿using System;
+using System.Linq;
+using SavingLittleSouls.DataHelpers;
+using SavingLittleSouls.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
-//// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+namespace saving_little_souls.Controllers.api
+{
+    [Route("api/[controller]")]
+    public class PetsController : Controller
+    {
+        private ApplicationDbContext _dbContext;
 
-//namespace saving_little_souls.Controllers.api
-//{
-//    [RoutePrefix("api/Pets")]
-//    public class PetsController : ApiController
-//    {
-//        private ApplicationDbContext _dbContext = new ApplicationDbContext();
+        public PetsController(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
-//        [HttpGet]
-//        public IHttpActionResult GetAll()
-//        {
-//            return Ok(
-//                    from pet in _dbContext.Pets.Include("Breed").Include("Breed.AnimalType").ToList()
-//                    select new { Id = pet.Id, Name = pet.Name, Color = pet.Color, Age = pet.Age, Breed = pet.Breed.Name, AnimalType = pet.Breed.AnimalType.Name }
-//                );
-//        }
-        
-//        [HttpGet]
-//        public IHttpActionResult GetById(string id)
-//        {
-//            var Id = int.Parse(id);
-//            var result = _dbContext.Pets.Where(p => p.Id == Id).Select( p =>
-//            new { p.Id ,p.Name, p.IdTag,p.AdmitionDate,p.AdoptionDate,Breed = p.Breed.Name,p.Color,Gender = p.Gender.Name,p.Weight,p.Notes,p.Age})
-//            ;
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(
+                    _dbContext.Pets.Select(p =>
+                    new { p.Id, p.Name,p.Gender,p.IdTag, p.Color, p.Age, Breed = p.Breed.Name, AnimalType = p.Breed.AnimalType.Name, ImagePath = p.PetImages.Single(i => i.Featured == true).ImagePath })
+                );
+        }
 
-//            if(result.Count() < 1)
-//            {
-//                return NotFound();
-//            }
-//            return Ok( result);
-//        }
+        [HttpGet("{id}")]
+        public IActionResult Get(string id)
+        {
+            var Id = int.Parse(id);
+            var result = _dbContext.Pets.Where(p => p.Id == Id).Select(p =>
+           new { p.Id, p.Name, p.IdTag, p.AdmitionDate, p.AdoptionDate, Breed = p.Breed.Name, p.Color, Gender = p.Gender.Name, p.Weight, p.Notes, p.Age, Images = p.PetImages.SelectMany(i => i.ImagePath)})
+            ;
+
+            if (result.Count() < 1)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
 
 
 
-//        [HttpPost]
-//        public IHttpActionResult Post([FromBody]Pet pet)
-//        {
-//            try
-//            {
-//                _dbContext.Pets.Add(pet);
-//                _dbContext.SaveChanges();
-               
-//            }
-//            catch(Exception ex)
-//            {
-//                return InternalServerError(new Exception("There was an error on the server"));
-//            }
+        [HttpPost]
+        public IActionResult Post([FromBody]Pet pet)
+        {
+            try
+            {
+                _dbContext.Pets.Add(pet);
+                _dbContext.SaveChanges();
 
-//            return Ok();
-//        }
+            }
+            catch (Exception ex)
+            {
+                return new StatusCodeResult(500);
+            }
 
-//        [HttpPut]
-//        public IHttpActionResult Update(string id, [FromBody] Pet pet)
-//        {
-//            return Ok(new
-//            {
-//                Message = "The pet wit id: " + id + " was updated successfully"
-//            });
-//        }
+            return Ok();
+        }
 
-//        [HttpDelete]
-//        public IHttpActionResult Delete(string id)
-//        {
-//            return Ok(new
-//            {
-//                Message = "The pet wit id: " + id + " was Deleted successfully"
-//            });
-//        }
-//    }
-//}
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody] Pet pet)
+        {
+            int result = 0;
+            try
+            {
+                pet.Id = id;
+                _dbContext.Entry(pet).State = EntityState.Modified;
+                result = _dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            int result = 0;
+            try
+            {
+                var pet = _dbContext.Pets.Find(id);
+                if (pet != null)
+                {
+                    _dbContext.Entry(pet).State = EntityState.Deleted;
+                    result = _dbContext.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new StatusCodeResult(500);
+            }
+
+            if (result > 0)
+            {
+                return Ok();
+            }
+            else
+            {
+                return new NotFoundResult();
+            }
+        }
+    }
+}

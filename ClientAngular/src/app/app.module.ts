@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './error/error.component';
+import {PetsService} from "./services/pets.service";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { ErrorComponent } from './error/error.component';
     HomeComponent,
     AdminComponent,
     LoginComponent,
-    ErrorComponent
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +25,8 @@ import { ErrorComponent } from './error/error.component';
     HttpModule,
     RoutesModule
   ],
-  providers: [],
+  providers: [PetsService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

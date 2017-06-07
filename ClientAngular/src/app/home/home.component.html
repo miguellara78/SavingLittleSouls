@@ -143,11 +143,13 @@
     </div>
     <div class="row" id="pendingFadeIn">
       <div *ngFor="let pet of pets" class="col span-1-of-4 box">
-        <img src="{{pet.imagePath}}"/>
+        <div style="min-height: 200px">
+          <img class="img-rounded" style="width: 100%; height: auto; margin-left: auto; margin-right: auto;" src="{{baseURL + pet.imagePath}}"/>
+        </div>
         <h3>{{pet.name}}</h3>
         <div class="pending-feature">
           <i class="fa fa-h-square small-icon"></i>
-          TAG ID: {{pet.tag}}
+          TAG ID: {{pet.idTag}}
         </div>
         <div class="pending-feature">
           {{pet.name}} is a {{pet.age}} y/o, {{pet.gender}} {{pet.breed}} {{pet.type}},
