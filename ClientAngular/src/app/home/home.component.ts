@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import {PetsService} from "../services/pets.service";
 
 @Component({
@@ -16,9 +16,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.baseURL = this.petsService.getBaseUrl();
-    this.pets = this.petsService.getAllPets().subscribe((pets)=>{
-      console.log(pets);
-      this.pets = pets;
+    this.petsService.getAllPets().subscribe((res) => {
+      this.pets = res.json()
     });
   }
 }

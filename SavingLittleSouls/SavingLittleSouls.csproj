@@ -6,17 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="NewFolder\**" />
-    <Compile Remove="wwwroot\assets\**" />
-    <Content Remove="NewFolder\**" />
-    <Content Remove="wwwroot\assets\**" />
-    <EmbeddedResource Remove="NewFolder\**" />
-    <EmbeddedResource Remove="wwwroot\assets\**" />
-    <None Remove="NewFolder\**" />
-    <None Remove="wwwroot\assets\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="wwwroot\petImages\55465543\1.jpg">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
@@ -46,6 +35,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="EntityFrameworkCore.SqlServerCompact40" Version="1.1.0.1" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.2" />
@@ -63,7 +53,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\NewFolder\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>
