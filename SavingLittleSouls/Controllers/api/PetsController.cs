@@ -22,7 +22,7 @@ namespace saving_little_souls.Controllers.api
         {
             return Ok(
                     _dbContext.Pets.Select(p =>
-                    new { p.Id, p.Name,p.Gender,p.IdTag, p.Color, p.Age, Breed = p.Breed.Name, AnimalType = p.Breed.AnimalType.Name, ImagePath = p.PetImages.Single(i => i.Featured == true).ImagePath })
+                    new { p.Id, p.Name,Gender = p.Gender.Name,p.IdTag, p.Color, p.Age, Breed = p.Breed.Name, AnimalType = p.Breed.AnimalType.Name, ImagePath = p.PetImages.Single(i => i.Featured == true).ImagePath,p.Weight })
                 );
         }
 
