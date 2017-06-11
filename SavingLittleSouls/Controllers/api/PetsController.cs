@@ -22,7 +22,7 @@ namespace saving_little_souls.Controllers.api
         {
             return Ok(
                     _dbContext.Pets.Select(p =>
-                    new { p.Id, p.Name,Gender = p.Gender.Name,p.IdTag, p.Color, p.Age, Breed = p.Breed.Name, AnimalType = p.Breed.AnimalType.Name, ImagePath = p.PetImages.Single(i => i.Featured == true).ImagePath,p.Weight })
+                    new { p.Id, p.Name,Gender = p.Gender.Name,p.IdTag, p.Color, p.Age, Breed = p.Breed.Name, AnimalType = p.Breed.AnimalType.Name, ImagePath = p.PetImages.Single(i => i.Featured == true).ImagePath,p.Weight,p.IsAdopted})
                 );
         }
 
@@ -31,7 +31,7 @@ namespace saving_little_souls.Controllers.api
         {
             var Id = int.Parse(id);
             var result = _dbContext.Pets.Where(p => p.Id == Id).Select(p =>
-           new { p.Id, p.Name, p.IdTag, p.AdmitionDate, p.AdoptionDate, Breed = p.Breed.Name, p.Color, Gender = p.Gender.Name, p.Weight, p.Notes, p.Age, Images = p.PetImages.SelectMany(i => i.ImagePath)})
+           new { p.Id, p.Name, p.IdTag, p.AdmitionDate, p.AdoptionDate, Breed = p.Breed.Name, p.Color, Gender = p.Gender.Name, p.Weight, p.Notes, p.Age, Images = p.PetImages.Select(i => i.ImagePath)})
             ;
 
             if (result.Count() < 1)

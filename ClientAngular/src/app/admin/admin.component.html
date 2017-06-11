@@ -1,12 +1,34 @@
-<nav>
-
+<nav id="header" class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a routerLink="/admin" class="navbar-brand"><i class="fa fa-paw"> Saving Little Souls</i></a>
+    </div>
+  <ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle"><i class="fa fa-user"></i> Miguel Lara <i class="caret"></i></a>
+      <ul class="dropdown-menu">
+        <li><a href="#">Logout</a></li>
+      </ul>
+    </li>
+  </ul>
+  </div>
 </nav>
-<div class="row h-100">
-  <div class="col-md-2">
-
+<div id="contentWrapper" class="row">
+  <div id="sideMenuWrapper" class="col-md-2">
+    <div id="sideMenu" class="list-group">
+      <a class="list-group-item" routerLinkActive="active" routerLink="/admin/pets"><i class="fa fa-paw"></i> Pets</a>
+      <a class="list-group-item" routerLinkActive="active" routerLink="/admin/adopters"><i class="fa fa-users"></i> Adopters</a>
+      <a class="list-group-item"><i class="fa fa-wrench"></i> Maintenance</a>
+      <div class="list-group list-group-child">
+        <a class="list-group-item" routerLinkActive="active" routerLink="/admin/types"><i class="fa fa-asterisk"></i> Types</a>
+        <a class="list-group-item" routerLinkActive="active" routerLink="/admin/breeds"><i class="fa fa-flask"></i> Breeds</a>
+        <a class="list-group-item" routerLinkActive="active" routerLink="/admin/genders"><i class="fa fa-mars-double"></i> Genders</a>
+        <a class="list-group-item" routerLinkActive="active" routerLink="/admin/states"><i class="fa fa-map"></i> States</a>
+      </div>
+    </div>
   </div>
   <div class="col-md-10">
-
+    <router-outlet></router-outlet>
   </div>
 </div>
 <div class="row">

@@ -10,6 +10,14 @@ import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './error/error.component';
 import {PetsService} from "./services/pets.service";
+import { PetsComponent } from './admin/pets/pets.component';
+import { AdoptersComponent } from './admin/adopters/adopters.component';
+import { BreedsComponent } from './admin/breeds/breeds.component';
+import { TypesComponent } from './admin/types/types.component';
+import { StatesComponent } from './admin/states/states.component';
+import { GendersComponent } from './admin/genders/genders.component';
+import { PetComponent } from './admin/pet/pet.component';
+import { NewPetComponent } from './admin/new-pet/new-pet.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +26,14 @@ import {PetsService} from "./services/pets.service";
     AdminComponent,
     LoginComponent,
     ErrorComponent,
+    PetsComponent,
+    AdoptersComponent,
+    BreedsComponent,
+    TypesComponent,
+    StatesComponent,
+    GendersComponent,
+    PetComponent,
+    NewPetComponent,
   ],
   imports: [
     BrowserModule,

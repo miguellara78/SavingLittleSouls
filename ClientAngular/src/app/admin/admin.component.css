@@ -1,1 +1,25 @@
+#header{
+  margin-bottom: 0;
+}
 
+#contentWrapper,#contentWrapper div, #sideMenu{
+  height: 100%;
+}
+
+#sideMenu .list-group-item{
+  border: 0;
+}
+
+#sideMenu {
+  width: 150px;
+  background-color: #32383e;
+}
+
+#sideMenuWrapper{
+  width: 150px;
+  margin-right: 20px;
+}
+
+.list-group-child i{
+  margin-left:20px;
+}

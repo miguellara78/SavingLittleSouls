@@ -7,7 +7,7 @@ import {PetsService} from "../services/pets.service";
   styleUrls: ['./css/animate.css','./css/Grid.css','./css/latofonts.css','./css/main.css','./css/Site.css','./css/queries.css']
 })
 export class HomeComponent implements OnInit {
-  pets: any = [];
+  pets: any[];
   baseURL: string;
 
   constructor(private petsService: PetsService) {

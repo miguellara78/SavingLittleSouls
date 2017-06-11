@@ -19,4 +19,11 @@ export class PetsService {
       return Observable.throw(error);
     });
   }
+
+  getPet(id: number) {
+    return this.http.get(this.baseUrl + '/api/pets/' + id).catch((error: Response | any)=>{
+      console.log('Error Code: ' +error.status + ' Message: ' + error.statusText);
+      return Observable.throw(error);
+    });
+  }
 }
