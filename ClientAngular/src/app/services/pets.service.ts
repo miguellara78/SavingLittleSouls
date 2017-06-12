@@ -1,29 +1,18 @@
 ﻿import { Injectable } from '@angular/core';
-import {Http,Response} from '@angular/http';
 import 'rxjs/Rx';
-import {Observable} from "rxjs/Observable";
+import {DataHelperService} from "./data-helper.service";
 
 @Injectable()
 export class PetsService {
-  baseUrl = 'http://localhost:59465';
-
-  constructor(private http: Http) { }
-
-  getBaseUrl() {
-    return this.baseUrl;
+  private petsDataUrl = '/api/pets/';
+  constructor(private dataHelperService: DataHelperService) {
   }
 
   getAllPets() {
-    return this.http.get(this.baseUrl + '/api/pets').catch((error: Response | any)=>{
-      console.log('Error Code: ' +error.status + ' Message: ' + error.statusText);
-      return Observable.throw(error);
-    });
+    return this.dataHelperService.getData(this.petsDataUrl);
   }
 
   getPet(id: number) {
-    return this.http.get(this.baseUrl + '/api/pets/' + id).catch((error: Response | any)=>{
-      console.log('Error Code: ' +error.status + ' Message: ' + error.statusText);
-      return Observable.throw(error);
-    });
+    return this.dataHelperService.getDataById(this.petsDataUrl + id);
   }
 }
