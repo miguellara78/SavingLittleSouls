@@ -31,7 +31,7 @@ namespace saving_little_souls.Controllers.api
         {
             var Id = int.Parse(id);
             var result = _dbContext.Pets.Where(p => p.Id == Id).Select(p =>
-           new { p.Id, p.Name, p.IdTag, p.AdmitionDate, p.AdoptionDate, Breed = p.Breed.Name, p.Color, Gender = p.Gender.Name, p.Weight, p.Notes, p.Age, Images = p.PetImages.Select(i => i.ImagePath)})
+           new { p.Id, p.Name, p.IdTag, p.AdmitionDate,Status = p.Status.Name,StatusDescription = p.Status.Description, p.AdoptionDate, Breed = p.Breed.Name, p.Color, Gender = p.Gender.Name, p.Weight, p.Notes, p.Age,p.IsAdopted, AnimalType = p.Breed.AnimalType.Name, Images = p.PetImages.Select(i => i.ImagePath)})
             ;
 
             if (result.Count() < 1)
@@ -40,7 +40,6 @@ namespace saving_little_souls.Controllers.api
             }
             return Ok(result);
         }
-
 
 
         [HttpPost]

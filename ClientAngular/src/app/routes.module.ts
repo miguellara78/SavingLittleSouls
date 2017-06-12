@@ -10,8 +10,8 @@ import {BreedsComponent} from "./admin/breeds/breeds.component";
 import {PetsComponent} from "./admin/pets/pets.component";
 import {StatesComponent} from "./admin/states/states.component";
 import {TypesComponent} from "./admin/types/types.component";
-import {PetComponent} from "app/admin/pet/pet.component";
-import {NewPetComponent} from "./admin/new-pet/new-pet.component";
+import {PetComponent} from "app/admin/pets/pet/pet.component";
+import {NewPetComponent} from "./admin/pets/new-pet/new-pet.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent,pathMatch: 'full'},
