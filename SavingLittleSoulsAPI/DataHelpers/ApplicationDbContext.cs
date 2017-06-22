@@ -1,18 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SavingLittleSouls.Models;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using SavingLittleSouls.Models;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Web;
 
 namespace SavingLittleSouls.DataHelpers
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        public ApplicationDbContext() : 
+            base("Data Source =" + HttpRuntime.AppDomainAppPath + @"\App_Data\MyCarClassifiedsDB.sdf; Password = betita01")
         {
 
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AnimalFamily>().HasKey(a => a.Id);
             modelBuilder.Entity<AnimalFamily>().Property(a => a.Name)
@@ -29,10 +30,10 @@ namespace SavingLittleSouls.DataHelpers
             modelBuilder.Entity<AnimalType>().Property(a => a.Description)
                 .IsRequired()
                 .HasMaxLength(250);
-            modelBuilder.Entity<AnimalType>().HasOne(a => a.AnimalFamily)
+            modelBuilder.Entity<AnimalType>().HasRequired(a => a.AnimalFamily)
                 .WithMany(b => b.AnimalTypes)
                 .HasForeignKey(c => c.AnimalFamilyId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Breed>().HasKey(a => a.Id);
             modelBuilder.Entity<Breed>().Property(a => a.Name)
@@ -41,10 +42,10 @@ namespace SavingLittleSouls.DataHelpers
             modelBuilder.Entity<Breed>().Property(a => a.Description)
                 .IsRequired()
                 .HasMaxLength(250);
-            modelBuilder.Entity<Breed>().HasOne(a => a.AnimalType)
+            modelBuilder.Entity<Breed>().HasRequired(a => a.AnimalType)
                 .WithMany(b => b.Breeds)
                 .HasForeignKey(c => c.AnimalTypeId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Pet>().HasKey(a => a.Id);
             modelBuilder.Entity<Pet>().Property(a => a.Name)
@@ -68,21 +69,21 @@ namespace SavingLittleSouls.DataHelpers
                .IsRequired();
             modelBuilder.Entity<Pet>().Property(a => a.Age)
               .IsRequired();
-            modelBuilder.Entity<Pet>().HasOne(a => a.Status)
+            modelBuilder.Entity<Pet>().HasRequired(a => a.Status)
                .WithMany(b => b.Pets)
                .HasForeignKey(c => c.StatusId)
-               .OnDelete(DeleteBehavior.SetNull);
-            modelBuilder.Entity<Pet>().HasOne(a => a.Adopter)
+               .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Pet>().HasRequired(a => a.Adopter)
               .WithMany(b => b.Pets)
               .HasForeignKey(c => c.AdopterId);
-            modelBuilder.Entity<Pet>().HasOne(a => a.Gender)
+            modelBuilder.Entity<Pet>().HasRequired(a => a.Gender)
               .WithMany(b => b.Pets)
               .HasForeignKey(c => c.GenderId)
-              .OnDelete(DeleteBehavior.SetNull);
-            modelBuilder.Entity<Pet>().HasOne(a => a.Breed)
+              .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Pet>().HasRequired(a => a.Breed)
               .WithMany(b => b.Pets)
               .HasForeignKey(c => c.BreedId)
-              .OnDelete(DeleteBehavior.SetNull);
+              .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Status>().HasKey(a => a.Id);
             modelBuilder.Entity<Status>().Property(a => a.Name)
@@ -111,10 +112,10 @@ namespace SavingLittleSouls.DataHelpers
                 .IsRequired()
                 .HasMaxLength(100);
             modelBuilder.Entity<PetImage>().Property(a => a.Featured);
-            modelBuilder.Entity<PetImage>().HasOne(a => a.Pet)
+            modelBuilder.Entity<PetImage>().HasRequired(a => a.Pet)
                .WithMany(b => b.PetImages)
                .HasForeignKey(c => c.PetId)
-               .OnDelete(DeleteBehavior.SetNull);
+               .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Adopter>().HasKey(a => a.Id);
             modelBuilder.Entity<Adopter>().Property(a => a.FirstName)
@@ -142,10 +143,10 @@ namespace SavingLittleSouls.DataHelpers
                 .HasMaxLength(20);
             modelBuilder.Entity<Adopter>().Property(a => a.Fax)
                 .HasMaxLength(20);
-            modelBuilder.Entity<Adopter>().HasOne(a => a.State)
+            modelBuilder.Entity<Adopter>().HasRequired(a => a.State)
               .WithMany(b => b.Adopters)
               .HasForeignKey(c => c.StateId)
-              .OnDelete(DeleteBehavior.SetNull);
+              .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Role>().HasKey(a => a.Id);
             modelBuilder.Entity<Role>().Property(a => a.RoleName)
@@ -171,10 +172,10 @@ namespace SavingLittleSouls.DataHelpers
             modelBuilder.Entity<User>().Property(a => a.Password)
                .IsRequired()
                .HasMaxLength(20);
-            modelBuilder.Entity<User>().HasOne(a => a.Role)
+            modelBuilder.Entity<User>().HasRequired(a => a.Role)
               .WithMany(b => b.Users)
               .HasForeignKey(c => c.RoleId)
-              .OnDelete(DeleteBehavior.SetNull);
+              .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);
         }

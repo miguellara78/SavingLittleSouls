@@ -2,14 +2,16 @@
 using System.Linq;
 using SavingLittleSouls.DataHelpers;
 using SavingLittleSouls.Models;
-using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Data.Entity;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace saving_little_souls.Controllers.api
 {
-    [Route("api/[controller]")]
-    public class StatesController : Controller
+    [RoutePrefix("api/states")]
+    public class StatesController : ApiController
     {
         private ApplicationDbContext _dbContext;
 
@@ -18,8 +20,9 @@ namespace saving_little_souls.Controllers.api
             _dbContext = dbContext;
         }
 
-        [HttpGet()]
-        public OkObjectResult Get()
+        [Route("")]
+        [HttpGet]
+        public IHttpActionResult Get()
         {
             return Ok(
                     from status in _dbContext.States.ToList()
@@ -28,7 +31,8 @@ namespace saving_little_souls.Controllers.api
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
+        [Route("{id}")]
+        [HttpGet]
         public string Get(int id)
         {
             return "value";
@@ -42,14 +46,16 @@ namespace saving_little_souls.Controllers.api
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
+        [Route("{id}")]
+        [HttpPut]
         public void Put(int id, [FromBody]string value)
         {
 
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
+        [Route("{id}")]
+        [HttpDelete]
         public void Delete(int id)
         {
 

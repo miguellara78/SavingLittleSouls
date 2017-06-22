@@ -2,32 +2,35 @@
 using System.Linq;
 using SavingLittleSouls.DataHelpers;
 using SavingLittleSouls.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Data.Entity;
 
 namespace saving_little_souls.Controllers.api
 {
-    [Route("api/[controller]")]
-    public class PetsController : Controller
+    [RoutePrefix("api/pets")]
+    public class PetsController : ApiController
     {
         private ApplicationDbContext _dbContext;
 
-        public PetsController(ApplicationDbContext dbContext)
+        public PetsController()
         {
-            _dbContext = dbContext;
+            _dbContext = new ApplicationDbContext();
         }
 
+        [Route("")]
         [HttpGet]
-        public IActionResult Get()
+        public IHttpActionResult Get()
         {
             return Ok(
                     _dbContext.Pets.Select(p =>
-                    new { p.Id, p.Name,Gender = p.Gender.Name,p.IdTag, p.Color, p.Age, Breed = p.Breed.Name, AnimalType = p.Breed.AnimalType.Name, ImagePath = p.PetImages.Single(i => i.Featured == true).ImagePath,p.Weight,p.IsAdopted})
+                    new { p.Id, p.Name,Gender = p.Gender.Name,p.IdTag, p.Color, p.Age, Breed = p.Breed.Name, AnimalType = p.Breed.AnimalType.Name, ImagePath = p.PetImages.FirstOrDefault(i => i.Featured == true).ImagePath,p.Weight,p.IsAdopted})
                 );
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(string id)
+        [Route("{id}")]
+        [HttpGet]
+        public IHttpActionResult Get(string id)
         {
             var Id = int.Parse(id);
             var result = _dbContext.Pets.Where(p => p.Id == Id).Select(p =>
@@ -42,8 +45,9 @@ namespace saving_little_souls.Controllers.api
         }
 
 
+        [Route("")]
         [HttpPost]
-        public IActionResult Post([FromBody]Pet pet)
+        public IHttpActionResult Post([FromBody]Pet pet)
         {
             try
             {
@@ -53,14 +57,15 @@ namespace saving_little_souls.Controllers.api
             }
             catch (Exception ex)
             {
-                return new StatusCodeResult(500);
+                return InternalServerError(ex);
             }
 
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] Pet pet)
+        [Route("{id}")]
+        [HttpPut]
+        public IHttpActionResult Update(int id, [FromBody] Pet pet)
         {
             int result = 0;
             try
@@ -71,14 +76,15 @@ namespace saving_little_souls.Controllers.api
             }
             catch (Exception ex)
             {
-                return new StatusCodeResult(500);
+                return InternalServerError(ex);
             }
 
             return Ok();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [Route("{id}")]
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
         {
             int result = 0;
             try
@@ -92,7 +98,7 @@ namespace saving_little_souls.Controllers.api
             }
             catch (Exception ex)
             {
-                return new StatusCodeResult(500);
+                return InternalServerError(ex);
             }
 
             if (result > 0)
@@ -101,7 +107,7 @@ namespace saving_little_souls.Controllers.api
             }
             else
             {
-                return new NotFoundResult();
+                return NotFound();
             }
         }
     }

@@ -1,29 +1,28 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
 using SavingLittleSouls.DataHelpers;
 using SavingLittleSouls.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+using System.Web.Http;
+using System.Data.Entity;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SavingLittleSouls.Controllers.API
 {
     [Authorize]
-    [Route("api/[controller]")]
-    public class AdoptersController : Controller
+    [RoutePrefix("api/adopters")]
+    public class AdoptersController : ApiController
     {
         private ApplicationDbContext _dbContext;
 
-        public AdoptersController(ApplicationDbContext dbContext)
+        public AdoptersController()
         {
-            _dbContext = dbContext;
+            _dbContext = new ApplicationDbContext();
         }
 
+        [Route("")]
         [HttpGet]
-        public IActionResult Get()
+        public IHttpActionResult Get()
         {
             return Ok(
                     _dbContext.Adopters.Select(a =>
@@ -31,8 +30,9 @@ namespace SavingLittleSouls.Controllers.API
                 );
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [Route("{id}")]
+        [HttpGet]
+        public IHttpActionResult Get(int id)
         {
             return Ok(
                     _dbContext.Adopters.Where(a => a.Id == id).Select(a =>
@@ -53,8 +53,9 @@ namespace SavingLittleSouls.Controllers.API
                 );
         }
 
+        [Route("")]
         [HttpPost]
-        public IActionResult Post([FromBody] Adopter adopter)
+        public IHttpActionResult Post([FromBody] Adopter adopter)
         {
             
             try
@@ -65,14 +66,15 @@ namespace SavingLittleSouls.Controllers.API
             }
             catch (Exception ex)
             {
-                return new StatusCodeResult(500);
+                return InternalServerError(ex);
             }
 
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id,[FromBody] Adopter adopter)
+        [Route("{id}")]
+        [HttpPut]
+        public IHttpActionResult Put(int id,[FromBody] Adopter adopter)
         {
             int result = 0;
             try
@@ -83,14 +85,15 @@ namespace SavingLittleSouls.Controllers.API
             }
             catch (Exception ex)
             {
-                return new StatusCodeResult(500);
+                return InternalServerError(ex);
             }
 
             return Ok();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [Route("{id}")]
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
         {
             int result = 0;
             try
@@ -104,7 +107,7 @@ namespace SavingLittleSouls.Controllers.API
             }
             catch (Exception ex)
             {
-                return new StatusCodeResult(500);
+                return InternalServerError(ex);
             }
 
             if(result > 0)
@@ -113,7 +116,7 @@ namespace SavingLittleSouls.Controllers.API
             }
             else
             {
-                return new NotFoundResult();
+                return NotFound();
             }
         }
     }
