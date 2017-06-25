@@ -1,3 +1,94 @@
-<p>
-  new-pet works!
-</p>
+<br>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="container-fluid">
+      <h3>New Pet Registration</h3>
+    </div>
+  </div>
+  <div class="panel-body">
+    <form>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" name="name" id="name"  [(ngModel)]="pet.name">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Color</label>
+            <input type="text" class="form-control" name="color" id="color"  [(ngModel)]="pet.color">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>Age (years)</label>
+            <input type="number" class="form-control" name="age" id="age"  [(ngModel)]="pet.age">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>Weight (lbs)</label>
+            <input type="number" class="form-control" name="weight" id="weight"  [(ngModel)]="pet.weight">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Gender</label>
+            <select class="form-control" name="gender" id="gender"  [(ngModel)]="pet.genderId">
+              <option></option>
+              <option *ngFor="let gender of genders" value="{{gender.id}}">{{gender.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Animal Type</label>
+            <select class="form-control" name="animalType" id="animalType" [(ngModel)]="pet.animalTypeId">
+              <option></option>
+              <option *ngFor="let type of animalTypes" value="{{type.id}}">{{type.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Breed</label>
+            <select class="form-control" name="breed" id="breed"  [(ngModel)]="pet.breedId">
+              <option></option>
+              <option *ngFor="let breed of breeds" value="{{breed.id}}">{{breed.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Notes</label>
+            <textarea rows="5" class="form-control" name="notes" id="notes" placeholder="Notes"
+                      [(ngModel)]="pet.notes"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Image/Photo</label>
+            <input type="file" class="form-control" name="image" id="image" accept=".png,.jpg" (change)="setImage($event)">
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <button type="submit" class="btn btn-success" (click)="registerPet()">Register</button>
+            <button type="button" class="btn btn-danger" (click)="cancelRegistration()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{{pet | json}}

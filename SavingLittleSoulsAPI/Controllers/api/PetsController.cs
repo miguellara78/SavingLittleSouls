@@ -5,6 +5,8 @@ using SavingLittleSouls.Models;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Data.Entity;
+using System.Web;
+using System.IO;
 
 namespace saving_little_souls.Controllers.api
 {
@@ -45,10 +47,48 @@ namespace saving_little_souls.Controllers.api
         }
 
 
+        [Route("images/{id}")]
+        [HttpPost]
+        public IHttpActionResult Post(int id)
+        {
+            var pet = _dbContext.Pets.Find(id);
+            var petImagePath = "";
+
+            try
+            {
+                var httpRequest = HttpContext.Current.Request;
+                if(httpRequest.Files.Count > 0)
+                {
+                    var file = httpRequest.Files[0];
+                    var fileExt = file.FileName.Substring(file.FileName.Length - 3, 3);
+                    var filePath = HttpContext.Current.Server.MapPath("~/petImages/" + pet.IdTag + "/1." + fileExt);
+                    Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/petImages/" + pet.IdTag));
+                    petImagePath = "/petImages/" + pet.IdTag + "/1." + fileExt;
+                    file.SaveAs(filePath);
+                }
+
+                _dbContext.PetImages.Add(new PetImage { Featured = true, ImagePath = petImagePath, PetId = pet.Id });
+                _dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                _dbContext.Pets.Remove(_dbContext.Pets.Find(id));
+                _dbContext.SaveChanges();
+                return InternalServerError(ex);
+            }
+
+            return Ok();
+        }
+
         [Route("")]
         [HttpPost]
         public IHttpActionResult Post([FromBody]Pet pet)
         {
+            pet.IdTag = "58962655";
+            pet.AdmitionDate = DateTime.Now;
+            pet.AdoptionDate = DateTime.Now;
+            pet.StatusId = 1;
+
             try
             {
                 _dbContext.Pets.Add(pet);
@@ -60,7 +100,7 @@ namespace saving_little_souls.Controllers.api
                 return InternalServerError(ex);
             }
 
-            return Ok();
+            return Ok(new { petId = pet.Id });
         }
 
         [Route("{id}")]
