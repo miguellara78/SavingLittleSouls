@@ -5,7 +5,7 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class DataHelperService {
 
- private baseUrl = 'http://localhost:59465';
+ private baseUrl = 'http://localhost:60676/';
 
   constructor(private http: Http) { }
 

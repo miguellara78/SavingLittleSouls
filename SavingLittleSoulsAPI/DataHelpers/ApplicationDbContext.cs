@@ -1,5 +1,4 @@
 ﻿using SavingLittleSouls.Models;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Web;
 
@@ -7,12 +6,6 @@ namespace SavingLittleSouls.DataHelpers
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext() : 
-            base("Data Source =" + HttpRuntime.AppDomainAppPath + @"\App_Data\MyCarClassifiedsDB.sdf; Password = betita01")
-        {
-
-        }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AnimalFamily>().HasKey(a => a.Id);

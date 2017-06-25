@@ -15,8 +15,6 @@ namespace SavingLittleSoulsAPI
         {
             app.UseCookieAuthentication(new CookieAuthenticationOptions{
                 AuthenticationType = "ApplicationCookie",
-                AuthenticationMode = AuthenticationMode.Passive,
-                CookieName = ".SavingLittleSoulsLoginCookie",
                 ExpireTimeSpan = TimeSpan.FromMinutes(5)
             });
         }
