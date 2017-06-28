@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {PetsService} from "../../../services/pets.service";
 import {GendersService} from "../../../services/genders.service";
@@ -16,7 +16,9 @@ export class NewPetComponent implements OnInit {
   private genders;
   private animalTypes;
   private breeds;
-  private image: File;
+  @ViewChild('image1') image1: ElementRef;
+  @ViewChild('image2') image2: ElementRef;
+  @ViewChild('image3') image3: ElementRef;
 
   constructor(private router: Router,private petService: PetsService,private gendersService: GendersService,
     private breedsService: BreedsService,private animalTypesService: TypesService) { }
@@ -35,10 +37,24 @@ export class NewPetComponent implements OnInit {
   }
 
   registerPet(){
-    if( !isNullOrUndefined(this.image)){
+    let images: File[] = [];
+    let file = <HTMLInputElement>this.image1.nativeElement;
+    if(file.files.length > 0){
+      images.push(file.files[0]);
+    }
+    file = <HTMLInputElement>this.image2.nativeElement;
+    if(file.files.length > 0){
+      images.push(file.files[0]);
+    }
+    file = <HTMLInputElement>this.image3.nativeElement;
+    if(file.files.length > 0){
+      images.push(file.files[0]);
+    }
+
+    if( images.length > 0){
       this.petService.postNewPet(this.pet).subscribe((res) => {
         let newPet = res.json();
-        this.petService.postNewPetImage(this.image,newPet.petId).subscribe((res2)=>{
+        this.petService.postNewPetImage(images,newPet.petId).subscribe((res2)=>{
           this.router.navigate(['admin/pets/' + newPet.petId]);
         });
       });
@@ -47,12 +63,5 @@ export class NewPetComponent implements OnInit {
 
   cancelRegistration(){
     this.router.navigate(['admin/pets']);
-  }
-
-  setImage(event){
-
-    if(event.srcElement.files.length > 0){
-      this.image = event.srcElement.files[0];
-    }
   }
 }

@@ -21,7 +21,7 @@ export class PetsService {
     return this.dataHelperService.postData(this.petsDataUrl,pet);
   }
 
-  postNewPetImage(image: File,petId: number){
-    return this.dataHelperService.postImage(this.petsDataUrl + 'images/' + petId,image);
+  postNewPetImage(images: File[],petId: number){
+    return this.dataHelperService.postImage(this.petsDataUrl + 'images/' + petId,images);
   }
 }

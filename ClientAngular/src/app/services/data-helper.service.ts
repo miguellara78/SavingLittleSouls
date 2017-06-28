@@ -34,9 +34,11 @@ export class DataHelperService {
     })
   }
 
-  postImage(dataUrl: string, fileData: File){
+  postImage(dataUrl: string, filesData: File[]){
     let formData: FormData = new FormData();
-    formData.append('imageFile',fileData,fileData.name);
+    filesData.forEach((data)=>{
+      formData.append(data.name,data,data.name);
+    });
     let headers = new Headers();
     let options = new RequestOptions({headers: headers});
 

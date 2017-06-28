@@ -57,17 +57,20 @@ namespace saving_little_souls.Controllers.api
             try
             {
                 var httpRequest = HttpContext.Current.Request;
-                if(httpRequest.Files.Count > 0)
+                bool featured = true;
+                for (int i = 0;i< httpRequest.Files.Count; i++)
                 {
-                    var file = httpRequest.Files[0];
+                    var file = httpRequest.Files[i];
                     var fileExt = file.FileName.Substring(file.FileName.Length - 3, 3);
-                    var filePath = HttpContext.Current.Server.MapPath("~/petImages/" + pet.IdTag + "/1." + fileExt);
+                    var filePath = HttpContext.Current.Server.MapPath("~/petImages/" + pet.IdTag + "/" + (i + 1).ToString() + "." + fileExt);
                     Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/petImages/" + pet.IdTag));
-                    petImagePath = "/petImages/" + pet.IdTag + "/1." + fileExt;
+                    petImagePath = "/petImages/" + pet.IdTag + "/" + (i + 1).ToString() + "." + fileExt;
                     file.SaveAs(filePath);
+
+                    _dbContext.PetImages.Add(new PetImage { Featured = featured, ImagePath = petImagePath, PetId = pet.Id });
+                    featured = false;
                 }
 
-                _dbContext.PetImages.Add(new PetImage { Featured = true, ImagePath = petImagePath, PetId = pet.Id });
                 _dbContext.SaveChanges();
             }
             catch (Exception ex)
@@ -84,7 +87,7 @@ namespace saving_little_souls.Controllers.api
         [HttpPost]
         public IHttpActionResult Post([FromBody]Pet pet)
         {
-            pet.IdTag = "58962655";
+            pet.IdTag = "58962656";
             pet.AdmitionDate = DateTime.Now;
             pet.AdoptionDate = DateTime.Now;
             pet.StatusId = 1;

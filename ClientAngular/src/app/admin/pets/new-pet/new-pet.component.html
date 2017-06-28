@@ -74,8 +74,10 @@
       <div class="row">
         <div class="col-md-12">
           <div class="form-group">
-            <label>Image/Photo</label>
-            <input type="file" class="form-control" name="image" id="image" accept=".png,.jpg" (change)="setImage($event)">
+            <label>Images/Photos</label>
+            <input type="file" class="form-control" name="image1" id="image1" accept=".png,.jpg" #image1>
+            <input type="file" class="form-control" name="image2" id="image2" accept=".png,.jpg" #image2>
+            <input type="file" class="form-control" name="image3" id="image3" accept=".png,.jpg" #image3>
           </div>
         </div>
       </div>
@@ -91,4 +93,3 @@
     </form>
   </div>
 </div>
-{{pet | json}}
